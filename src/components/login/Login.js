@@ -1,27 +1,30 @@
 import React from 'react'
 import { useState} from 'react'
-import axios from 'axios';
+import api from '../../api/api';
+import { useLocation, useNavigate } from 'react-router-dom';
 const Login = () => {
   const [userId, setUserId] = useState('');
   const [userPasswd, setUserPasswd] = useState('');
   const [error,setError] = useState(null);
-  const URL = `${process.env.REACT_APP_API_URL}/login`;
-  
+  const location = useLocation();
+  const navigate = useNavigate();
+
+    const from = location.state?.from?.pathname || '/posts';
     const login = async (e) => {
       e.preventDefault();
-      console.log(process.env.REACT_APP_API_URL);
       try{
-        const response = await axios.post(URL, {
+        const response = await api.post('/login', {
           userId,
           userPasswd
         })
+
         if(response.status === 200){
-          alert("Login Successful.");
-          setError(null);
+          localStorage.setItem('jtoken',response.data.token);
+          navigate(from,{replace:true})
         }
             
       }catch(err){
-        if(err.status === 401){
+        if(err.response.status === 401){
           setError("User Name or Password Wrong")
         }
       }

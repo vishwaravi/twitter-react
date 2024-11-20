@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import LoginPage from "./components/login/LoginPage";
 import Signup from "./components/login/Signup";
 import Post from "./components/Post";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   return (
@@ -12,7 +13,11 @@ function App() {
         {/* Login Routes */}
         <Route path="login" element={<LoginPage />} />
         <Route path="signup" element={<Signup />} />
-        <Route path="posts" element={<Post />} />
+        <Route path="posts" element={
+          <PrivateRoute>
+            <Post />
+          </PrivateRoute>
+          } />
 
       </Routes>
     </div>
