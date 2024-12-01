@@ -1,4 +1,5 @@
 import daisyUIThemes, { black } from 'daisyui/src/theming/themes';
+import { TbKeyframes } from 'react-icons/tb';
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -8,6 +9,16 @@ module.exports = {
     extend: {
       fontFamily :{
         body : ['Poppins'],
+      },
+      keyframes:{
+        pop :{
+          '0%':{transform:'scale(1)'},
+          '50%':{transform:'scale(1.3)'},
+          '100%':{transform:'scale(1)'},
+        },
+        animation:{
+          pop:'pop 0.4s ease-in-out',
+        }
       }
     },
   },

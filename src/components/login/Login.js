@@ -9,7 +9,7 @@ const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-    const from = location.state?.from?.pathname || '/posts';
+    const from = location.state?.from?.pathname || '/home';
     const login = async (e) => {
       e.preventDefault();
       try{
