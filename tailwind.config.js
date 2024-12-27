@@ -10,16 +10,25 @@ module.exports = {
       fontFamily :{
         body : ['Poppins'],
       },
-      keyframes:{
-        pop :{
-          '0%':{transform:'scale(1)'},
-          '50%':{transform:'scale(1.3)'},
-          '100%':{transform:'scale(1)'},
+      animation:{
+        pop : "pop 0.4s ease-out"
+      },
+      keyframes: {
+        pop: {
+          "0%": {
+            transform: "scale(1)",
+            opacity: "1",
+          },
+          "50%": {
+            transform: "scale(1.5)",
+            opacity: "1",
+          },
+          "100%": {
+            transform: "scale(1)",
+            opacity: "1",
+          },
         },
-        animation:{
-          pop:'pop 0.4s ease-in-out',
-        }
-      }
+      },
     },
   },
   plugins: [

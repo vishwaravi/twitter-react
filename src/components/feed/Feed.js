@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import api from '../../api/api'
 import Post from './Post';
 import { useNavigate } from 'react-router-dom';
+import { PiEmptyBold } from "react-icons/pi";
 
 const Feed = () => {
 	const navigate = useNavigate();
@@ -26,12 +27,13 @@ const Feed = () => {
 
 		}
 		fetchFeed();
-	}, []);
+	}, [navigate]);
 
 
 	return (
 		<div id="feed">
 			{
+				feed.length ?
 				feed.map(
 					post => (
 						<Post key={post.id}
@@ -40,9 +42,14 @@ const Feed = () => {
 							userId={post.userId}
 							likesCount={post.likesCount}
 							hashtags={post.hashtags}
+							timestamp={post.timeStamp}
 						/>
 					)
-				)
+				):
+				<div className='flex  flex-col items-center justify-center h-screen w-screen'>
+					<PiEmptyBold className='size-20' />
+					<p className='text-xl font-body'>No Post at this Time...</p>
+				</div>
 			}
 		</div>
 	)

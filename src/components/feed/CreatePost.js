@@ -4,17 +4,22 @@ import { IoCloseCircle } from "react-icons/io5";
 import { useState, useRef } from 'react';
 import { IoMdArrowRoundBack } from 'react-icons/io';
 import { useNavigate } from 'react-router-dom';
+import api from '../../api/api'
+
 const CreatePost = () => {
 
 	const navigate = useNavigate();
-	const [value, setValue] = useState('');
+	const [tweetContent, setTweetContent] = useState('');
 	const [imageSrc, setImageSrc] = useState(null);
+	const [file,setFile] = useState(null);
 	const textareaRef = useRef(null);
 	const uploadRef = useRef(null);
 
+	const postData = new FormData();
+
 	//function for auto grow the text area when writing.
 	const handleInputChange = (event) => {
-		setValue(event.target.value);
+		setTweetContent(event.target.value);
 		// Adjust the height of the textarea
 		if (textareaRef.current) {
 			textareaRef.current.style.height = 'auto'; // Reset height
@@ -22,6 +27,7 @@ const CreatePost = () => {
 		}
 	};
 
+	// for arrow previous page or going back
 	const goBack = () => {
 		return navigate('home')
 	}
@@ -31,33 +37,54 @@ const CreatePost = () => {
 			uploadRef.current.click();
 		}
 	}
+	
 	const handleFileChange = (e) => {
-		const file = e.target.files[0];
-		if (file) {
+		const tmpfile = e.target.files[0];
+		setFile(e.target.files[0])
+		if (tmpfile) {
 			const reader = new FileReader();
 			reader.onload = () => {
 				setImageSrc(reader.result); // Set the image source to the file content
 			};
-			reader.readAsDataURL(file); // Read file as a data URL
+			reader.readAsDataURL(tmpfile); // Read file as a data URL
 		}
 	}
 	const handleImgRemove = () => {
 		setImageSrc(null);
 	}
-	console.log(imageSrc);
+
+	const handlePost = async () => {
+		postData.append("tweetContent",tweetContent);
+		file && postData.append("file",file);
+
+		try{
+			const response = await api.post('/home',postData,{
+				headers: {
+					"Content-Type": "multipart/form-data",
+				}
+			})
+			if(response.status === 201)
+				alert("posted");
+
+		}catch(err){
+			console.log(err)
+		}
+	}
+
+
 	return (
 		<div id="create-post" className='grid grid-cols-12'>
 			<div id="nav" className='flex items-center col-span-9'>
 				<IoMdArrowRoundBack className='size-8 m-2' onClick={goBack} />
 			</div>
 			<div className='col-span-3 flex items-center m-2'>
-				<button className='bg-primary font-body text-white p-2 w-full rounded-full' >Post</button>
+				<button onClick={handlePost} className='bg-primary font-body text-white p-2 w-full rounded-full'>Post</button>
 			</div>
 			<div id="post-area" className='col-span-12 border-b-[1px] border-secondary'>
 				<div id="flex-container" className='mt-3 flex justify-center col-span-12'>
 					<img className='col-span-2 rounded-full h-10 w-10 m-4' src='https://static.vecteezy.com/system/resources/previews/036/594/092/non_2x/man-empty-avatar-photo-placeholder-for-social-networks-resumes-forums-and-dating-sites-male-and-female-no-photo-images-for-unfilled-user-profile-free-vector.jpg' alt='pp' />
 					<textarea id="message" name="messageabsolute top-2" onChange={handleInputChange}
-						ref={textareaRef} value={value} rows="4" class="text-2xl w-full border-none resize-none border-secondary  mt-4 pt-1 focus:outline-none bg-black" placeholder="Whats Happening..." />
+						ref={textareaRef} value={tweetContent} rows="4" class="text-2xl w-full border-none resize-none border-secondary  mt-4 pt-1 focus:outline-none bg-black" placeholder="Whats Happening..." />
 				</div>
 				{
 					imageSrc ? (
