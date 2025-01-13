@@ -37,7 +37,7 @@ const Feed = () => {
 				feed.map(
 					post => (
 						<Post key={post.id}
-							youLiked={post.youLiked}
+							youLiked={post.isLiked}
 							tweetId={post.id}
 							tweetContent={post.tweetContent}
 							tweetFilePath={post.tweetFilePath}
