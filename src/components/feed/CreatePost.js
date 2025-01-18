@@ -44,7 +44,7 @@ const CreatePost = () => {
 		if (tmpfile) {
 			const reader = new FileReader();
 			reader.onload = () => {
-				setImageSrc(reader.result); // Set the image source to the file content
+				setImageSrc(reader.result); // Setitng the Uploaded image source to the file content
 			};
 			reader.readAsDataURL(tmpfile); // Read file as a data URL
 		}
@@ -53,6 +53,7 @@ const CreatePost = () => {
 		setImageSrc(null);
 	}
 
+	// Function for Posting the Content
 	const handlePost = async () => {
 		postData.append("tweetContent",tweetContent);
 		file && postData.append("file",file);

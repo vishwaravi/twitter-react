@@ -4,12 +4,13 @@ import { FaHeart } from "react-icons/fa";
 import { FiMessageCircle } from "react-icons/fi";
 import MenuButton from '../MenuButton';
 import api from '../../api/api';
+import { Navigate } from 'react-router-dom';
 
 const Post = ({ tweetId, userId, tweetContent, tweetFilePath, likesCount, timestamp,youLiked}) => {
 
     const [isliked, setIsLiked] = useState(youLiked);
     const [curLikesCount, setCurLikesCount] = useState(likesCount);
-    console.log(tweetId);
+    console.log(tweetFilePath);
     const handleLike = async () => {
         setIsLiked(!isliked);
         if (isliked) {
@@ -86,8 +87,9 @@ const Post = ({ tweetId, userId, tweetContent, tweetFilePath, likesCount, timest
                         <div className='like-wrapper flex items-center'>
                             <FaRegHeart onClick={handleLike} className='size-8 m-2' />
                             <p className='font'>{curLikesCount}</p>
-                        </div>)}
-                    <FiMessageCircle className='size-8 m-2' />
+                        </div>)
+                    }
+                    <FiMessageCircle className='size-8 m-2' onClick={<Navigate to={`comments/${tweetId}`} />} />
                 </div>
             </div>
         </>

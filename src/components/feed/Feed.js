@@ -34,6 +34,7 @@ const Feed = () => {
 		<div id="feed">
 			{
 				feed.length ?
+				// Generating Posts
 				feed.map(
 					post => (
 						<Post key={post.id}
@@ -48,6 +49,7 @@ const Feed = () => {
 						/>
 					)
 				):
+				// if there is Not Post in the Feed Page.
 				<div className='flex  flex-col items-center justify-center h-screen w-screen'>
 					<PiEmptyBold className='size-20' />
 					<p className='text-xl font-body'>No Post at this Time...</p>
