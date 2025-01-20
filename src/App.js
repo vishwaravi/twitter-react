@@ -5,12 +5,13 @@ import PrivateRoute from "./components/PrivateRoute";
 import Feed from "./components/feed/Feed";
 import CreatePost from "./components/feed/CreatePost";
 import Logout from "./components/login/Logout";
-import Comments from "./components/feed/Comments";
+import Comments from "./components/feed/CommentSection/CommentSection";
 
 function App() {
   return (
     <div className="App">
       <Routes>
+        <Route path="test" element={<Comments />} />
 
         {/* Login Routes */}
         <Route path="login" element={<LoginPage />} />
