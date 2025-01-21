@@ -6,13 +6,12 @@ import Feed from "./components/feed/Feed";
 import CreatePost from "./components/feed/CreatePost";
 import Logout from "./components/login/Logout";
 import Comments from "./components/feed/CommentSection/CommentSection";
+import CommentSection from "./components/feed/CommentSection/CommentSection";
 
 function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="test" element={<Comments />} />
-
         {/* Login Routes */}
         <Route path="login" element={<LoginPage />} />
         <Route path="signup" element={<Signup />} />
@@ -23,7 +22,7 @@ function App() {
         <Route path="/" element={<Navigate to="home" />} />
         <Route path="/home" element={<PrivateRoute><Feed /></PrivateRoute>} />
         <Route path="create" element={<PrivateRoute><CreatePost /></PrivateRoute>} />
-        <Route path="/home/:id" element={<PrivateRoute><Comments /></PrivateRoute>} />
+        <Route path="/home/:id/comments" element={<PrivateRoute><CommentSection /></PrivateRoute>} />
 
       </Routes>
     </div>

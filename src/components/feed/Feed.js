@@ -16,7 +16,6 @@ const Feed = () => {
 
 				if (response.status === 200) {
 					setFeed(response.data);
-					console.log(response.data)
 				}
 			} catch (err) {
 				if(err.response.status === 401){
@@ -46,6 +45,7 @@ const Feed = () => {
 							likesCount={post.likesCount}
 							hashtags={post.hashtags}
 							timestamp={post.timeStamp}
+							userProfile={post.userProfile}
 						/>
 					)
 				):

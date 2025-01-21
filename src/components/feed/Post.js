@@ -4,21 +4,21 @@ import { FaHeart } from "react-icons/fa";
 import { FiMessageCircle } from "react-icons/fi";
 import MenuButton from '../MenuButton';
 import api from '../../api/api';
-import { Navigate } from 'react-router-dom';
 import getPostTime from '../../utils/time';
+import DpPlaceHolder from '../../assets/dp-placeholder.svg'
+import { useNavigate } from 'react-router-dom';
 
-const Post = ({ tweetId, userId, tweetContent, tweetFilePath, likesCount, timestamp,youLiked}) => {
+const Post = ({tweetId,userProfile, userId, tweetContent, tweetFilePath, likesCount, timestamp,youLiked}) => {
 
     const [isliked, setIsLiked] = useState(youLiked);
     const [curLikesCount, setCurLikesCount] = useState(likesCount);
-    console.log(tweetFilePath);
+    const navigate = useNavigate();
     const handleLike = async () => {
         setIsLiked(!isliked);
         if (isliked) {
             setCurLikesCount(curLikesCount - 1);
             try {
-                let response = await api.put(`/home/${tweetId}/dislike`,{});
-                console.log(response);
+                await api.put(`/home/${tweetId}/dislike`,{});
             } catch (err) {
                 console.log(err);
             }
@@ -26,8 +26,7 @@ const Post = ({ tweetId, userId, tweetContent, tweetFilePath, likesCount, timest
         else {
             setCurLikesCount(curLikesCount + 1);
             try {
-                let response = await api.put(`/home/${tweetId}/like`,{});
-                console.log(response);
+                await api.put(`/home/${tweetId}/like`,{});
             } catch (err) {
                 console.log(err);
             }
@@ -35,12 +34,16 @@ const Post = ({ tweetId, userId, tweetContent, tweetFilePath, likesCount, timest
 
     }
 
+    const handleCommentClick = () => {
+            navigate(`/home/${tweetId}/comments`);
+    }
+
     return (
         <>
             <div id='post' className='grid p-3 grid-cols-12 border-b-[1px] border-secondary'>
 
                 <div id="name-dp-date" className='flex items-center col-span-11'>
-                    <img className='col-span-2 rounded-full h-10 w-10 m-2' src='https://static.vecteezy.com/system/resources/previews/036/594/092/non_2x/man-empty-avatar-photo-placeholder-for-social-networks-resumes-forums-and-dating-sites-male-and-female-no-photo-images-for-unfilled-user-profile-free-vector.jpg' alt='pp' />
+                    <img className='col-span-2 rounded-full h-10 w-10 m-2' src={userProfile ? userProfile:DpPlaceHolder} alt='pp' />
                     <p className='text-white p-2 pr-0 text-lg'>{userId}</p>
                     <p className='text-slate-500 p-2 text-lg'>· {getPostTime(timestamp)}</p>
                 </div>
@@ -73,7 +76,7 @@ const Post = ({ tweetId, userId, tweetContent, tweetFilePath, likesCount, timest
                             <p className='font'>{curLikesCount}</p>
                         </div>)
                     }
-                    <FiMessageCircle className='size-8 m-2' onClick={<Navigate to={`comments/${tweetId}`} />} />
+                    <FiMessageCircle className='size-8 m-2' onClick={handleCommentClick} />
                 </div>
             </div>
         </>
