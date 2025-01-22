@@ -2,7 +2,7 @@ import React from 'react'
 
 const Signup = () => {
 	return (
-		<div id="signup-page" className='m-6'>
+		<div id="signup-page" className='m-6 lg:h-screen'>
 			<p className='font-body font-semibold text-2xl'>Create Your account</p>
 			<form className='flex flex-col justify-center'>
 				<input

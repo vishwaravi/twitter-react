@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import { FiMessageCircle } from "react-icons/fi";
-import MenuButton from '../MenuButton';
 import api from '../../api/api';
 import getPostTime from '../../utils/time';
 import DpPlaceHolder from '../../assets/dp-placeholder.svg'
@@ -49,7 +48,6 @@ const Post = ({tweetId,userProfile, userId, tweetContent, tweetFilePath, likesCo
                 </div>
 
                 <div className="group relative flex items-center">
-                    <MenuButton />
                     <div className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 bg-gray-800 text-white text-sm py-1 px-2 rounded shadow-md transition-opacity duration-200">
                         <button>Nothing...</button>
                     </div>

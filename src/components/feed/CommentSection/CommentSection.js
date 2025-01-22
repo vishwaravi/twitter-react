@@ -19,7 +19,7 @@ const CommentSection = () => {
 
 
     return (
-        <div className='comment-section'>
+        <div className='comment-section lg:h-screen'>
             <div className='flex-container flex justify-center'>
                 <p className='text-lg font-bold'>Comments</p>
             </div>
@@ -35,7 +35,7 @@ const CommentSection = () => {
                                 userProfile={comment.userProfile}
                             />
                         )) :
-                        <div className='flex  flex-col items-center justify-center h-screen w-screen'>
+                        <div className='flex  flex-col items-center justify-center h-screen'>
                             <PiEmptyBold className='size-20' />
                             <p className='text-xl font-poppins'>No Comments Yet.</p>
                         </div>

@@ -5,12 +5,11 @@ import PrivateRoute from "./components/PrivateRoute";
 import Feed from "./components/feed/Feed";
 import CreatePost from "./components/feed/CreatePost";
 import Logout from "./components/login/Logout";
-import Comments from "./components/feed/CommentSection/CommentSection";
 import CommentSection from "./components/feed/CommentSection/CommentSection";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App lg:border-secondary lg:border-2 lg:w-[475px]">
       <Routes>
         {/* Login Routes */}
         <Route path="login" element={<LoginPage />} />
